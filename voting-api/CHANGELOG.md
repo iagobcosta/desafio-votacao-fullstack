@@ -1,4 +1,12 @@
-## [0.4.0] - 2026-03-20
+## [0.5.0] - 2026-03-20
+### Added
+- Unit tests for vote service
+- Test coverage for:
+    - successful vote
+    - duplicate vote
+    - closed session validation
+
+## [0.4.0]
 ### Added
 - Voting result endpoint
 - Optimized vote counting directly in database
