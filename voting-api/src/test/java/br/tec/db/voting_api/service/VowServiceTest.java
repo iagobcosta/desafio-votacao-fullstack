@@ -37,7 +37,7 @@ public class VowServiceTest {
     private SessionRepository sessionRepository;
 
     @Test
-    void mustRegisterVoteWhenSessionOpenAndAssociateDidNotVote() {
+    void shouldRegisterVoteWhenSessionOpenAndAssociateDidNotVote() {
 
         Long agendaId = 1L;
         Agenda agenda = new Agenda();
@@ -58,7 +58,7 @@ public class VowServiceTest {
     }
 
     @Test
-    void mustThrowErrorWhenMemberVoted() {
+    void shouldThrowErrorWhenMemberVoted() {
 
         Long agendaId = 1L;
         Agenda agenda = new Agenda();

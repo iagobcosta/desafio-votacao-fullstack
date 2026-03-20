@@ -1,4 +1,13 @@
-## [0.5.0] - 2026-03-20
+## [0.6.0] - 2026-03-20
+### Added
+- Integration tests using H2 database
+- Full voting flow test:
+  - create pauta
+  - open session
+  - vote
+  - get result
+
+## [0.5.0]
 ### Added
 - Unit tests for vote service
 - Test coverage for:
