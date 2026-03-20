@@ -1,4 +1,10 @@
-## [0.3.0] - 2026-03-20
+## [0.4.0] - 2026-03-20
+### Added
+- Voting result endpoint
+- Optimized vote counting directly in database
+- Result calculation (SIM venceu / NAO venceu / Empate)
+
+## [0.3.0]
 ### Added
 - Vote registration endpoint
 - Validation: associate can vote only once per pauta
