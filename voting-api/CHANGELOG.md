@@ -1,7 +1,13 @@
-## [0.2.0] - 2026-03-20
+## [0.3.0] - 2026-03-20
 ### Added
-- Voting session creation
+- Vote registration endpoint
+- Validation: associate can vote only once per pauta
+- Validation: vote only allowed while session is open
 
-## [0.1.0] - 2026-03-20
+## [0.2.0]
 ### Added
-- Pauta creation endpoint
+- Voting session creation with default duration rule
+
+## [0.1.0]
+### Added
+- Create pauta endpoint
