@@ -1,4 +1,9 @@
-## [0.6.0] - 2026-03-20
+## [0.7.0] - 2026-03-20
+### Added
+- Swagger/OpenAPI documentation
+- Endpoint documentation with @Operation and @Tag
+
+## [0.6.0]
 ### Added
 - Integration tests using H2 database
 - Full voting flow test:
