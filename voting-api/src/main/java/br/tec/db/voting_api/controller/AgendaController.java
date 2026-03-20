@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/agenda")
+@RequestMapping("/api/v1/agenda")
 @RequiredArgsConstructor
 public class AgendaController {
 
