@@ -1,4 +1,10 @@
-## [0.7.0] - 2026-03-20
+## [0.8.0] - 2026-03-21
+### Added
+- Dockerfile for API
+- docker-compose with PostgreSQL
+- One-command project execution
+
+## [0.7.0]
 ### Added
 - Swagger/OpenAPI documentation
 - Endpoint documentation with @Operation and @Tag
