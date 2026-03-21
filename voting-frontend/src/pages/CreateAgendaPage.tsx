@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { criarAgenda } from "../services/agendaService";
+import { MainLayout } from "../layouts/MainLayout";
+import { Container } from "../components/Container";
 
 export function CreateAgendaPage() {
   const [title, setTitle] = useState("");
@@ -19,14 +21,13 @@ export function CreateAgendaPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
-      >
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          Criar nova pauta
-        </h1>
+    <MainLayout>
+      <Container>
+        <h1 className="text-2xl font-bold mb-6">Criar nova pauta</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
+        >
 
         <input
           type="text"
@@ -50,6 +51,7 @@ export function CreateAgendaPage() {
           Criar pauta
         </button>
       </form>
-    </div>
+    </Container>
+  </MainLayout>
   );
 }
