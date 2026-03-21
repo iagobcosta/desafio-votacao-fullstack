@@ -1,5 +1,6 @@
 package br.tec.db.voting_api.controller;
 
+import br.tec.db.voting_api.config.ApiVersion;
 import br.tec.db.voting_api.dto.input.SessionInputDTO;
 import br.tec.db.voting_api.service.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/session")
+@RequestMapping(ApiVersion.V1 + "/session")
 @RequiredArgsConstructor
 @Tag(name = "Sessão", description = "Endpoints para gerenciamento as sessões")
 public class SessionController {

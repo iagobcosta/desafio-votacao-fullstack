@@ -1,5 +1,6 @@
 package br.tec.db.voting_api.controller;
 
+import br.tec.db.voting_api.config.ApiVersion;
 import br.tec.db.voting_api.dto.output.VoteResultOutputDTO;
 import br.tec.db.voting_api.service.VoteResultService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/vote-result")
+@RequestMapping(ApiVersion.V1 + "/vote-result")
 @RequiredArgsConstructor
 @Tag(name = "Resultados", description = "Endpoints para obter os resultados da votação")
 public class VoteResultController {

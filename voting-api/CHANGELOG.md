@@ -1,4 +1,8 @@
-## [1.1.1] - 2026-03-21
+## [1.2.1] - 2026-03-21
+### Added
+- API versioning using /api/v1 prefix
+
+## [1.1.1]
 ### Changed
 - Replaced Object[] result query with Spring Data projection for vote results
 
