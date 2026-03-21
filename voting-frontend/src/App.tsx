@@ -1,11 +1,9 @@
-import { CreateAgendaPage } from "./pages/CreateAgendaPage"
-import { ListAgendasPage } from "./pages/ListAgendasPage"
+import { AppRoutes } from "./routes/AppRoutes"
 
 function App() {
 
   return (
-    // <CreateAgendaPage />
-    <ListAgendasPage />
+    <AppRoutes />
   )
 }
 

@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -14,8 +15,8 @@ export function MainLayout({ children }: MainLayoutProps) {
           </h1>
 
           <nav className="flex gap-6 text-gray-600">
-            <a href="#">Pautas</a>
-            <a href="#">Nova pauta</a>
+            <Link to="/pautas">Pautas</Link>
+            <Link to="/pautas/nova">Nova pauta</Link>
           </nav>
         </div>
       </header>
