@@ -1,5 +1,6 @@
 package br.tec.db.voting_api.controller;
 
+import br.tec.db.voting_api.config.ApiVersion;
 import br.tec.db.voting_api.dto.input.AgendaInputDTO;
 import br.tec.db.voting_api.dto.output.AgendaOutputDTO;
 import br.tec.db.voting_api.service.AgendaService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/agenda")
+@RequestMapping(ApiVersion.V1 + "/agenda")
 @RequiredArgsConstructor
 @Tag(name = "Pautas", description = "Endpoints para gerenciamento de pautas")
 public class AgendaController {
