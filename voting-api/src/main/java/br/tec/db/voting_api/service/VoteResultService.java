@@ -9,6 +9,8 @@ import br.tec.db.voting_api.repository.VowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class VoteResultService {
@@ -20,11 +22,16 @@ public class VoteResultService {
         Agenda agenda = agendaRepository.findById(agendaId)
                 .orElseThrow(() -> new BusinessException("Pauta não encontrada"));
 
-        long totalYes = vowRepository.countByAgendaIdAndVote(agendaId, VowType.YES);
-        long totalNo = vowRepository.countByAgendaIdAndVote(agendaId, VowType.NO);
+        long numberOfVotes = vowRepository.countVotes(agendaId);
+
+        List<Object[]> results = vowRepository.countResult(agendaId);
+        Object[] firstRow = !results.isEmpty() ? results.get(0) : new Object[]{0L, 0L};
+
+        long totalYes = firstRow[0] != null ? ((Number) firstRow[0]).longValue() : 0L;
+        long totalNo = firstRow[1] != null ? ((Number) firstRow[1]).longValue() : 0L;
 
         String result = totalYes > totalNo ? "Sim" : totalYes < totalNo ? "Não" : "Empate";
 
-        return new VoteResultOutputDTO(agendaId, totalYes, totalNo, result);
+        return new VoteResultOutputDTO(agendaId, totalYes, totalNo, numberOfVotes, result);
     }
 }

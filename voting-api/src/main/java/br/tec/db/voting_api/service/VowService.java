@@ -44,7 +44,7 @@ public class VowService {
 
         CpfResponse response = cpfClient.validateCPF(vowInputDTO.associatedId());
 
-        if (response.status() == CpfStatus.UNABLE_TO_VOTE) {
+        if (CpfStatus.UNABLE_TO_VOTE.equals(response.status())) {
             throw new BusinessException("Associado não pode votar CPF inválido");
         }
 

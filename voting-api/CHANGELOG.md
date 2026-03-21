@@ -1,4 +1,10 @@
-## [1.0.0] - 2026-03-21
+## [1.1.0] - 2026-03-21
+### Added
+- Database indexes for vote performance
+- Unique constraint to prevent duplicate votes
+- Optimized queries for vote counting
+
+## [1.0.0]
 ### Added
 - Fake external CPF validation service
 - External client architecture
