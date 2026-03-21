@@ -6,6 +6,7 @@ import br.tec.db.voting_api.dto.output.VoteResultOutputDTO;
 import br.tec.db.voting_api.exception.BusinessException;
 import br.tec.db.voting_api.repository.AgendaRepository;
 import br.tec.db.voting_api.repository.VowRepository;
+import br.tec.db.voting_api.repository.projection.VotingResultProjection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,10 @@ public class VoteResultService {
 
         long numberOfVotes = vowRepository.countVotes(agendaId);
 
-        List<Object[]> results = vowRepository.countResult(agendaId);
-        Object[] firstRow = !results.isEmpty() ? results.get(0) : new Object[]{0L, 0L};
+        VotingResultProjection results = vowRepository.countResult(agendaId);
 
-        long totalYes = firstRow[0] != null ? ((Number) firstRow[0]).longValue() : 0L;
-        long totalNo = firstRow[1] != null ? ((Number) firstRow[1]).longValue() : 0L;
+        long totalYes = results.getTotalYes() != null ? results.getTotalYes() : 0L;
+        long totalNo = results.getTotalNo() != null ? results.getTotalNo() : 0L;
 
         String result = totalYes > totalNo ? "Sim" : totalYes < totalNo ? "Não" : "Empate";
 

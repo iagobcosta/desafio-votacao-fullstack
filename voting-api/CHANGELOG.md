@@ -1,4 +1,8 @@
-## [1.1.0] - 2026-03-21
+## [1.1.1] - 2026-03-21
+### Changed
+- Replaced Object[] result query with Spring Data projection for vote results
+
+## [1.1.0]
 ### Added
 - Database indexes for vote performance
 - Unique constraint to prevent duplicate votes
