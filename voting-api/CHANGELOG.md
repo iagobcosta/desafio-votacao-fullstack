@@ -1,4 +1,10 @@
-## [0.8.0] - 2026-03-21
+## [1.0.0] - 2026-03-21
+### Added
+- Fake external CPF validation service
+- External client architecture
+- CPF validation before voting
+
+## [0.8.0]
 ### Added
 - Dockerfile for API
 - docker-compose with PostgreSQL
