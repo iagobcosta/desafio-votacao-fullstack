@@ -5,7 +5,12 @@ export interface CriarAgendaRequest {
   description: string;
 }
 
-export const criarAgenda = async (data: CriarAgendaRequest) => {
+export const createAgenda = async (data: CriarAgendaRequest) => {
   const response = await api.post("/agenda", data);
+  return response.data;
+};
+
+export const listAgendas = async () => {
+  const response = await api.get("/agenda");
   return response.data;
 };

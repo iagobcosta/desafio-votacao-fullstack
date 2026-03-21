@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { criarAgenda } from "../services/agendaService";
+import { createAgenda } from "../services/agendaService";
 import { MainLayout } from "../layouts/MainLayout";
 import { Container } from "../components/Container";
 
@@ -10,7 +10,7 @@ export function CreateAgendaPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await criarAgenda({
+    await createAgenda({
       title,
       description,
     });
