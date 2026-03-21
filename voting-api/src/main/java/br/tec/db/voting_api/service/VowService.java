@@ -5,6 +5,9 @@ import br.tec.db.voting_api.domain.Session;
 import br.tec.db.voting_api.domain.Vow;
 import br.tec.db.voting_api.dto.input.VowInputDTO;
 import br.tec.db.voting_api.exception.BusinessException;
+import br.tec.db.voting_api.external.cpf.CpfClient;
+import br.tec.db.voting_api.external.cpf.CpfResponse;
+import br.tec.db.voting_api.external.cpf.CpfStatus;
 import br.tec.db.voting_api.repository.AgendaRepository;
 import br.tec.db.voting_api.repository.SessionRepository;
 import br.tec.db.voting_api.repository.VowRepository;
@@ -20,6 +23,7 @@ public class VowService {
     private final VowRepository vowRepository;
     private final AgendaRepository agendaRepository;
     private final SessionRepository sessionRepository;
+    private final CpfClient cpfClient;
 
 
     public void registerVote(Long agendaId, VowInputDTO vowInputDTO) {
@@ -36,6 +40,12 @@ public class VowService {
 
         if (vowRepository.existsByAssociatedIdAndAgendaId(vowInputDTO.associatedId(), agendaId)) {
             throw new BusinessException("Associado já votou nessa pauta");
+        }
+
+        CpfResponse response = cpfClient.validateCPF(vowInputDTO.associatedId());
+
+        if (response.status() == CpfStatus.UNABLE_TO_VOTE) {
+            throw new BusinessException("Associado não pode votar CPF inválido");
         }
 
         Vow vow = Vow.builder()
