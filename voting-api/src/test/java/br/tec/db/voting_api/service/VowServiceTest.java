@@ -46,13 +46,13 @@ public class VowServiceTest {
         Session session = new Session();
         session.setClosingDate(LocalDateTime.now().plusMinutes(5));
 
-        VowInputDTO vowInputDTO = new VowInputDTO("12345", VowType.YES);
+        VowInputDTO vowInputDTO = new VowInputDTO(agenda.getId(), "12345", VowType.YES);
 
         when(agendaRepository.findById(agendaId)).thenReturn(Optional.of(agenda));
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
         when(vowRepository.existsByAssociatedIdAndAgendaId("12345", agendaId)).thenReturn(false);
 
-        vowService.registerVote(agendaId, vowInputDTO);
+        vowService.registerVote(vowInputDTO);
 
         verify(vowRepository, times(1)).save(any(Vow.class));
     }
@@ -67,14 +67,14 @@ public class VowServiceTest {
         Session session = new Session();
         session.setClosingDate(LocalDateTime.now().plusMinutes(5));
 
-        VowInputDTO vowInputDTO = new VowInputDTO("12345", VowType.YES);
+        VowInputDTO vowInputDTO = new VowInputDTO(agenda.getId(), "12345", VowType.YES);
 
         when(agendaRepository.findById(agendaId)).thenReturn(Optional.of(agenda));
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
         when(vowRepository.existsByAssociatedIdAndAgendaId("12345", agendaId)).thenReturn(true);
 
         assertThrows(BusinessException.class,
-                () -> vowService.registerVote(agendaId, vowInputDTO));
+                () -> vowService.registerVote(vowInputDTO));
     }
 
     @Test
@@ -87,12 +87,12 @@ public class VowServiceTest {
         Session session = new Session();
         session.setClosingDate(LocalDateTime.now().minusMinutes(1));
 
-        VowInputDTO vowInputDTO = new VowInputDTO("12345", VowType.YES);
+        VowInputDTO vowInputDTO = new VowInputDTO(agenda.getId(), "12345", VowType.YES);
 
         when(agendaRepository.findById(agendaId)).thenReturn(Optional.of(agenda));
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
 
         assertThrows(BusinessException.class,
-                () -> vowService.registerVote(agendaId, vowInputDTO));
+                () -> vowService.registerVote(vowInputDTO));
     }
 }

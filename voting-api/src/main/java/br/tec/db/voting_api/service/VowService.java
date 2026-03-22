@@ -26,19 +26,19 @@ public class VowService {
     private final CpfClient cpfClient;
 
 
-    public void registerVote(Long agendaId, VowInputDTO vowInputDTO) {
+    public void registerVote(VowInputDTO vowInputDTO) {
 
-        Agenda agenda = agendaRepository.findById(agendaId)
+        Agenda agenda = agendaRepository.findById(vowInputDTO.agendaId())
                 .orElseThrow(() -> new BusinessException("Pauta não encontrada"));
 
-        Session session = sessionRepository.findByAgendaId(agendaId)
+        Session session = sessionRepository.findByAgendaId(vowInputDTO.agendaId())
                 .orElseThrow(() -> new BusinessException("Sessão não encontrada"));
 
         if (LocalDateTime.now().isAfter(session.getClosingDate())) {
             throw new BusinessException("Sessão encerrada");
         }
 
-        if (vowRepository.existsByAssociatedIdAndAgendaId(vowInputDTO.associatedId(), agendaId)) {
+        if (vowRepository.existsByAssociatedIdAndAgendaId(vowInputDTO.associatedId(), vowInputDTO.agendaId())) {
             throw new BusinessException("Associado já votou nessa pauta");
         }
 

@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 
 public record VowInputDTO(
 
+        @NotNull(message = "O associadoId é obrigatório")
+        Long agendaId,
+
         @NotBlank(message = "O associadoId é obrigatório")
         String associatedId,
 

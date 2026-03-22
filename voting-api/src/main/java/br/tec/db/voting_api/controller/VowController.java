@@ -17,10 +17,10 @@ public class VowController {
 
     private final VowService vowService;
 
-    @PostMapping("/{agendaId}/register")
+    @PostMapping("/register")
     @Operation(summary = "Registrar voto em uma pauta")
-    public ResponseEntity<Void> registerVote(@PathVariable Long agendaId, @RequestBody VowInputDTO vowInputDTO) {
-        vowService.registerVote(agendaId, vowInputDTO);
+    public ResponseEntity<Void> registerVote(@RequestBody VowInputDTO vowInputDTO) {
+        vowService.registerVote(vowInputDTO);
         return ResponseEntity.ok().build();
     }
 }
