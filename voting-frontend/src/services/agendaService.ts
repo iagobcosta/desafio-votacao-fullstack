@@ -14,3 +14,8 @@ export const listAgendas = async () => {
   const response = await api.get("/agenda");
   return response.data;
 };
+
+export const searchAgendaById = async (id: number) => {
+  const response = await api.get(`/agenda/${id}`);
+  return response.data;
+};

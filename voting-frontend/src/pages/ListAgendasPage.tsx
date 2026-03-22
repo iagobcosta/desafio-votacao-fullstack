@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+
 import { listAgendas } from "../services/agendaService";
 import { MainLayout } from "../layouts/MainLayout";
 import { Container } from "../components/Container";
@@ -33,6 +36,12 @@ export function ListAgendasPage() {
             >
               <h2 className="text-lg font-semibold">{pauta.title}</h2>
               <p className="text-gray-600">{pauta.description}</p>
+              <Link
+                to={`/pautas/${pauta.id}`}
+                className="text-blue-600 hover:underline"
+              >
+                Ver detalhes
+              </Link>
             </div>
           ))}
         </div>
