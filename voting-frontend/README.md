@@ -1,73 +1,132 @@
-# React + TypeScript + Vite
+# 🗳️ Voting Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de votação moderno e responsivo desenvolvido com React e TypeScript. Permite que usuários registrem votos em pautas compartilhadas com interface intuitiva e segura.
 
-Currently, two official plugins are available:
+## 📋 Descrição
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O **Voting Frontend** é a interface web para um sistema de votação distribuído. Permite:
 
-## React Compiler
+- 📝 Visualizar pautas de votação em tempo real
+- 🗳️ Registrar votos anônimos e seguros
+- ⏱️ Acompanhar o tempo restante da sessão de votação
+- 📊 Compartilhar links de votação via clipboard
+- 🔒 Validações de segurança (CPF único por voto)
+- 📱 Interface responsiva para desktop e mobile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- **React** (19.2.4) - Framework UI
+- **TypeScript** (5.9.3) - Tipagem estática
+- **Vite** (8.0.1) - Bundler e dev server
+- **React Router DOM** (7.13.1) - Roteamento
+- **Tailwind CSS** (4.2.2) - Estilização
+- **Axios** (1.13.6) - Cliente HTTP
+- **ESLint** (9.39.4) - Linting e qualidade de código
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📋 Pré-requisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Antes de começar, certifique-se de que você tem instalado:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Node.js** (versão 16.0.0 ou superior)
+- **npm** (versão 7.0.0 ou superior)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Instalação
+
+1. **Clone o repositório ou extraia os arquivos:**
+
+```bash
+cd voting-frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Instale as dependências:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+## 💻 Executando Localmente
+
+### Modo Desenvolvimento
+
+Para iniciar o servidor de desenvolvimento com Hot Module Replacement (HMR):
+
+```bash
+npm run dev
+```
+
+O aplicativo estará disponível em:
+- **http://localhost:5173** (padrão Vite)
+- Ou a URL exibida no terminal
+
+### Build para Produção
+
+Para compilar a aplicação para produção:
+
+```bash
+npm run build
+```
+
+Os arquivos otimizados serão gerados na pasta `dist/`.
+
+### Preview de Produção
+
+Para visualizar o build de produção localmente:
+
+```bash
+npm run preview
+```
+
+### Linting
+
+Para verificar a qualidade do código:
+
+```bash
+npm run lint
+```
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/      # Componentes reutilizáveis
+├── layouts/         # Layouts da aplicação
+├── pages/           # Páginas principais
+├── routes/          # Configuração de rotas
+├── services/        # Serviços (API, lógica)
+├── types/           # Tipos TypeScript
+├── styles/          # Estilos globais
+└── App.tsx          # Componente raiz
+```
+
+## 🔗 Endpoints da API
+
+A aplicação se conecta com os seguintes serviços:
+
+- **Obter Pauta**: `GET /api/agendas/:id`
+- **Registrar Voto**: `POST /api/votes`
+- **Obter Resultado**: `GET /api/votes/result/:agendaId`
+
+> Configure a URL base da API no arquivo `src/services/api.ts`
+
+## ⚙️ Configuração
+
+### Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto (opcional):
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+> Se não configurado, a aplicação usa a URL padrão definida em `src/services/api.ts`
+
+## 🧪 Funcionalidades Principais
+
+- ✅ Listagem de pautas
+- ✅ Detalhes da pauta com timer em tempo real
+- ✅ Registro de voto com validação de CPF
+- ✅ Modal de confirmação de voto
+- ✅ Compartilhamento de link de votação
+- ✅ Exibição de resultado de votos
+- ✅ Sessão de votação com tempo limite
+
