@@ -19,7 +19,7 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "agenda_id", nullable = false)
     private Agenda agenda;
 

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +24,10 @@ public class SessionService {
         Agenda agenda = agendaRepository.findById(agendaId)
                 .orElseThrow(() -> new BusinessException("Pauta não encontrada!"));
 
-        if (sessionRepository.findByAgendaId(agendaId).isPresent()) {
-            throw new BusinessException("Já existe uma sessão aberta para essa pauta");
+        Optional<Session> sessionOptional = sessionRepository.findByAgendaId(agendaId);
+        if (sessionOptional.isPresent()) {
+            if (LocalDateTime.now().isBefore(sessionOptional.get().getClosingDate()))
+                throw new BusinessException("Já existe uma sessão aberta para essa pauta");
         }
 
         LocalDateTime now = LocalDateTime.now();

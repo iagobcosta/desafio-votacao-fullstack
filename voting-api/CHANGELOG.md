@@ -1,4 +1,8 @@
-## [1.2.1] - 2026-03-21
+## [1.2.1] - 2026-03-22
+### Added
+- Adding a route to search for agenda items by ID.
+
+## [1.2.1]
 ### Added
 - API versioning using /api/v1 prefix
 
