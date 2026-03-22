@@ -1,6 +1,10 @@
 package br.tec.db.voting_api.integration;
 
+import br.tec.db.voting_api.external.cpf.CpfClient;
+import br.tec.db.voting_api.external.cpf.CpfResponse;
+import br.tec.db.voting_api.external.cpf.CpfStatus;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
@@ -9,6 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,12 +51,13 @@ public class VoteIntegrationTest {
 
         String voteJson = """
         {
+          "agendaId": 1,
           "associatedId": "12345",
           "vote": "YES"
         }
         """;
 
-        mockMvc.perform(post("/api/v1/vote/1/register")
+        mockMvc.perform(post("/api/v1/vote/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(voteJson))
                 .andExpect(status().isOk());

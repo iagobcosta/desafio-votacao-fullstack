@@ -6,9 +6,13 @@ import br.tec.db.voting_api.domain.Vow;
 import br.tec.db.voting_api.domain.enums.VowType;
 import br.tec.db.voting_api.dto.input.VowInputDTO;
 import br.tec.db.voting_api.exception.BusinessException;
+import br.tec.db.voting_api.external.cpf.CpfClient;
+import br.tec.db.voting_api.external.cpf.CpfResponse;
+import br.tec.db.voting_api.external.cpf.CpfStatus;
 import br.tec.db.voting_api.repository.AgendaRepository;
 import br.tec.db.voting_api.repository.SessionRepository;
 import br.tec.db.voting_api.repository.VowRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class VowServiceTest {
+class VowServiceTest {
 
     @InjectMocks
     private VowService vowService;
@@ -36,9 +40,13 @@ public class VowServiceTest {
     @Mock
     private SessionRepository sessionRepository;
 
-    @Test
-    void shouldRegisterVoteWhenSessionOpenAndAssociateDidNotVote() {
+    @Mock
+    private CpfClient cpfClient;
 
+    @Test
+    @DisplayName("Deve registrar o voto quando a sessão estiver aberta e o associado ainda não votou")
+    void shouldRegisterVoteWhenSessionOpenAndAssociateDidNotVote() {
+        // Arrange
         Long agendaId = 1L;
         Agenda agenda = new Agenda();
         agenda.setId(agendaId);
@@ -52,14 +60,20 @@ public class VowServiceTest {
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
         when(vowRepository.existsByAssociatedIdAndAgendaId("12345", agendaId)).thenReturn(false);
 
+        CpfResponse response = new CpfResponse(CpfStatus.ABLE_TO_VOTE);
+        when(cpfClient.validateCPF(vowInputDTO.associatedId())).thenReturn(response);
+
+        // Act
         vowService.registerVote(vowInputDTO);
 
+        // Assert
         verify(vowRepository, times(1)).save(any(Vow.class));
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando o associado já tiver votado na pauta")
     void shouldThrowErrorWhenMemberVoted() {
-
+        // Arrange
         Long agendaId = 1L;
         Agenda agenda = new Agenda();
         agenda.setId(agendaId);
@@ -73,13 +87,14 @@ public class VowServiceTest {
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
         when(vowRepository.existsByAssociatedIdAndAgendaId("12345", agendaId)).thenReturn(true);
 
-        assertThrows(BusinessException.class,
-                () -> vowService.registerVote(vowInputDTO));
+        // Act & Assert
+        assertThrows(BusinessException.class, () -> vowService.registerVote(vowInputDTO));
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a sessão estiver encerrada")
     void shouldThrowErrorWhenSessionClose() {
-
+        // Arrange
         Long agendaId = 1L;
         Agenda agenda = new Agenda();
         agenda.setId(agendaId);
@@ -92,7 +107,7 @@ public class VowServiceTest {
         when(agendaRepository.findById(agendaId)).thenReturn(Optional.of(agenda));
         when(sessionRepository.findByAgendaId(agendaId)).thenReturn(Optional.of(session));
 
-        assertThrows(BusinessException.class,
-                () -> vowService.registerVote(vowInputDTO));
+        // Act & Assert
+        assertThrows(BusinessException.class, () -> vowService.registerVote(vowInputDTO));
     }
 }

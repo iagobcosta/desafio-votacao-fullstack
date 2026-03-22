@@ -1,4 +1,14 @@
-## [1.2.1] - 2026-03-22
+## [1.3.2] - 2026-03-22
+### Added
+- Unit tests for AgendaService.
+- Unit tests for SessionService.
+- Unit tests for VoteResultService.
+
+### Changed
+- Standardized VowServiceTest structure using @DisplayName, Arrange, Act, and Assert.
+- Fixed 404 bug in VoteIntegrationTest related to vote register route and missing payload attributes.
+
+## [1.2.2]
 ### Added
 - Adding a route to search for agenda items by ID.
 
